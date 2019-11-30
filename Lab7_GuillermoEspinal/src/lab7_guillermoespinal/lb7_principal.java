@@ -685,7 +685,7 @@ public class lb7_principal extends javax.swing.JFrame {
 
         try {
             bus_global.addEstudiante((estudiantes) cb_estudiantes.getSelectedItem());
-            JOptionPane.showMessageDialog(this, "Se creo el estudiante");
+            JOptionPane.showMessageDialog(this, "Se agrego el estudiante");
             
         } catch (Exception e) {
             e.printStackTrace();
