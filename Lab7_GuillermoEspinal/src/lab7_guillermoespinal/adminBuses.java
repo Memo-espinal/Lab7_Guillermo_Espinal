@@ -61,7 +61,7 @@ public class adminBuses {
                 ObjectInputStream objeto
                     = new ObjectInputStream(entrada);
                 try {
-                    while ((temp = (bus) objeto.readObject()) != null) {
+                    while ((temp = (bus)objeto.readObject()) != null) {
                         buses.add(temp);
                     }
                 } catch (EOFException e) {
