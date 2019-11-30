@@ -700,8 +700,14 @@ public class lb7_principal extends javax.swing.JFrame {
                 y_s.add(((estudiantes) bus_global.getEstudiantes().get(i)).getParada().getY());
             }
             parada parada = new parada("", 0, 0);
-            HiloBarra hb= new HiloBarra(pb_tiempo,bus_global,parada);
-            hb.start();
+            ArrayList<parada>paradas = new ArrayList<>();
+            for (int i = 0; i <bus_global.getEstudiantes().size(); i++) {
+                paradas.add(bus_global.getEstudiantes().get(i).getParada());
+            }
+            HiloBarra hb= new HiloBarra(pb_tiempo,bus_global,paradas);
+                 hb.start();
+           
+           
             
             
             /* for (int i = 0; i < x_s.size(); i++) {

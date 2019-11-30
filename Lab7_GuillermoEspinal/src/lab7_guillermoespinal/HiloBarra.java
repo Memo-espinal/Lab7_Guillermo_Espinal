@@ -18,10 +18,11 @@ public class HiloBarra extends Thread{
     double y_global2=0;
     ArrayList<parada> paradas = new ArrayList<>();
 
-    public HiloBarra(JProgressBar barra,bus bus,parada parada) {
+    public HiloBarra(JProgressBar barra,bus bus, ArrayList<parada> paradas ) {
         this.barra = barra;
         this.Bus=bus;
-        this.paradaact=parada;
+        this.paradas=paradas;
+//this.paradaact=parada;
         vive=true;
         avanzar=true;
     }
@@ -61,10 +62,34 @@ public class HiloBarra extends Thread{
         while(vive){
            
             if(avanzar){
-              double tiempo = distancia(paradaact, x_global, y_global)/Bus.getVelocidad();
-              barra.setMaximum((int) Math.round(tiempo));
-              barra.setValue(barra.getValue()+1);
+                for (parada parada1 : paradas) {
+                    paradaact = parada1;
+                    double tiempo = distancia(paradaact, x_global, y_global)/Bus.getVelocidad();
+                                    System.out.println(tiempo);
+
+                     barra.setMaximum((int)tiempo);
+              
+                    barra.setValue((int) (barra.getValue()+0.1));
+              
+                     //barra.setString(Integer.toString(barra.getValue()));
+                    
+                }
+                try
+             {
+                Thread.sleep(1000);
+             }
+             catch (InterruptedException ex) {
+                 
+             }
+             // double tiempo = distancia(paradaact, x_global, y_global)/Bus.getVelocidad();
+               // System.out.println(tiempo);
+                /*barra.setMaximum(tiempo.intValue());
+                
+                barra.setValue(barra.getValue()+1);
+                
+                barra.setString(Integer.toString(barra.getValue()));*/
             }
+            
         
        }
     } 
