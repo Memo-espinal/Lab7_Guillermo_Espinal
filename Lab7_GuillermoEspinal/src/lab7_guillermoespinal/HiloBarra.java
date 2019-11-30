@@ -2,7 +2,10 @@
 package lab7_guillermoespinal;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class HiloBarra extends Thread{
@@ -10,18 +13,23 @@ public class HiloBarra extends Thread{
     private boolean vive;
     private boolean avanzar;
     bus Bus;
+    ArrayList<estudiantes>estudiantes = new ArrayList<>();
     parada paradaact;
     parada paradasig;
     double x_global=0;
     double y_global=0;
-    double x_global2=0;
-    double y_global2=0;
+    JTable tabla;
+    
+    /*double x_global2=0;
+    double y_global2=0;*/
     ArrayList<parada> paradas = new ArrayList<>();
 
-    public HiloBarra(JProgressBar barra,bus bus, ArrayList<parada> paradas ) {
+    public HiloBarra(JProgressBar barra,bus bus, ArrayList<parada> paradas,JTable tabla, ArrayList<estudiantes>estudiantes ) {
         this.barra = barra;
         this.Bus=bus;
         this.paradas=paradas;
+        this.tabla = tabla;
+        this.estudiantes= estudiantes;
 //this.paradaact=parada;
         vive=true;
         avanzar=true;
@@ -59,20 +67,37 @@ public class HiloBarra extends Thread{
     
     @Override
     public void run(){
-        while(vive){
+        //for (int i = 0; i < estudiantes.size(); i++) {
+        //for no funcion, con cont??
+        //cont si sale no lo toques
+        int cont=0;
+        try {
+            
+        
+             while(vive){
            
             if(avanzar){
-                for (parada parada1 : paradas) {
-                    paradaact = parada1;
+               
+                    paradaact = estudiantes.get(cont).getParada();
                     double tiempo = distancia(paradaact, x_global, y_global)/Bus.getVelocidad();
-                                    System.out.println(tiempo);
-
-                     barra.setMaximum((int)tiempo);
-              
-                    barra.setValue((int) (barra.getValue()+0.1));
-              
-                     //barra.setString(Integer.toString(barra.getValue()));
+                    System.out.println(tiempo);
+                     barra.setMaximum((int)distancia(paradaact, tiempo, tiempo));
+                    barra.setValue((int) (barra.getValue()+1));
+                    double almacen = tiempo;
+                   // if ((int)distancia(paradaact, x_global, y_global)==barra.getValue() ) {
+                     Object[] newrow={
+                            paradaact.getNombre(),
+                            tiempo,
+                            estudiantes.get(cont).getNombre() };
+                      DefaultTableModel modelo = (DefaultTableModel)tabla.getModel();
+                    modelo.addRow(newrow);
+                    tabla.setModel(modelo);
+                    barra.setValue(0);
+                    cont++;
+                   // }
+                   
                     
+                   
                 }
                 try
              {
@@ -80,18 +105,16 @@ public class HiloBarra extends Thread{
              }
              catch (InterruptedException ex) {
                  
+                 
              }
-             // double tiempo = distancia(paradaact, x_global, y_global)/Bus.getVelocidad();
-               // System.out.println(tiempo);
-                /*barra.setMaximum(tiempo.intValue());
-                
-                barra.setValue(barra.getValue()+1);
-                
-                barra.setString(Integer.toString(barra.getValue()));*/
+           
             }
+             } catch (Exception e) {
+                 JOptionPane.showMessageDialog(null,"termino");
+        }
             
         
-       }
+     //  }
     } 
     public double distancia(parada parada,double x,double y){
         double num=(Math.pow((parada.getX() -x), 2) + Math.pow((parada.getY()-y), 2));

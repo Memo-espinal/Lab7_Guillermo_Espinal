@@ -483,7 +483,7 @@ public class lb7_principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Crear Parada");
+        jMenu2.setText("Simular");
 
         jMenuItem4.setText("Simular");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -704,7 +704,7 @@ public class lb7_principal extends javax.swing.JFrame {
             for (int i = 0; i <bus_global.getEstudiantes().size(); i++) {
                 paradas.add(bus_global.getEstudiantes().get(i).getParada());
             }
-            HiloBarra hb= new HiloBarra(pb_tiempo,bus_global,paradas);
+            HiloBarra hb= new HiloBarra(pb_tiempo,bus_global,paradas,jt_tabla,bus_global.getEstudiantes());
                  hb.start();
            
            
@@ -743,31 +743,31 @@ public class lb7_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_empezarMouseClicked
 
     
-    public static double[] ordenar(ArrayList arreglo)
+    /* public static double[] ordenar(ArrayList arreglo)
     {
-        double[] arrglo=new double[arreglo.size()];
-        for (int i = 0; i < arreglo.size(); i++) {
-            arrglo[i]=(double) arreglo.get(i);
-        }
-      Double auxiliar;
-      double[] arregloOrdenado;
-      //ArrayList<Double> ordenado;
-      
-      for(int i = 1; i < arrglo.length; i++)
-      {
-        for(int j = 0;j < arrglo.length-i;j++)
-        {
-          if((arrglo[j]) > (arrglo[j+1]))
-          {
-            auxiliar = arrglo[j];
-            arrglo[j] =arrglo[j+1];
-            arrglo[j+1] = auxiliar;
-          }   
-        }
-      }
-      arregloOrdenado = arrglo;
-      return arregloOrdenado;
+    double[] arrglo=new double[arreglo.size()];
+    for (int i = 0; i < arreglo.size(); i++) {
+    arrglo[i]=(double) arreglo.get(i);
     }
+    Double auxiliar;
+    double[] arregloOrdenado;
+    //ArrayList<Double> ordenado;
+    
+    for(int i = 1; i < arrglo.length; i++)
+    {
+    for(int j = 0;j < arrglo.length-i;j++)
+    {
+    if((arrglo[j]) > (arrglo[j+1]))
+    {
+    auxiliar = arrglo[j];
+    arrglo[j] =arrglo[j+1];
+    arrglo[j+1] = auxiliar;
+    }
+    }
+    }
+    arregloOrdenado = arrglo;
+    return arregloOrdenado;
+    }*/
     /**
      * @param args the command line arguments
      */
